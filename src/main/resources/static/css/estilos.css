@@ -1,0 +1,33 @@
+body {
+	background-image: url(../img/star-wars.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+th,
+td {
+	color: #ffffff
+}
+
+h1 {
+	font-size: 60px;
+}
+
+p {
+	display: inline-block;
+}
+
+a {
+	color: #ffffff;
+
+}
+
+a:hover {
+	color: red;
+	text-decoration: none;
+}
+td{
+	position: relative;
+	top: 25%;
+}

@@ -1,0 +1,105 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Peliculas</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+		integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+	<link th:href="@{/css/estilos.css}" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="container">
+
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">STAR WARS</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link" href="#">Peliculas</a>
+					<a class="nav-link" th:href="@{/api/v1/peoples}">Actores</a>
+					<a class="nav-link" href="#">Planetas</a>
+					<a class="nav-link" href="#">Especies</a>
+				</div>
+			</div>
+		</nav>
+
+		<br><br>
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-center text-primary">Lista de Peliculas</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+
+				<table class="table table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th class="text-center" scope="col">Titulo</th>
+							<th class="text-center" scope="col">Episodio</th>
+							<th class="text-center" scope="col">Apertura</th>
+							<th class="text-center" scope="col">Director</th>
+							<th class="text-center" scope="col">Productor</th>
+							<th class="text-center" scope="col">Fecha Lanzamiento</th>
+							<th class="text-center" scope="col">Actores</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<span th:each="pelicula: ${peliculas}">
+
+							<tr th:each="film: ${pelicula.results}">
+
+
+								<td class="text-center" th:text="${film.title}"></td>
+								<td class="text-center" th:text="${film.episode_id}"></td>
+								<td class="text-center" th:text="${film.opening_crawl}"></td>
+								<td class="text-center" th:text="${film.director}"></td>
+								<td class="text-center" th:text="${film.producer}"></td>
+								<td class="text-center" th:text="${film.release_date}"></td>
+								
+								<td class="text-center">
+									<p th:each="actors: ${film.characters}">
+										<button type="button" class="btn btn-success">
+											<a th:href="${actors}">Ver Actor</a>
+										</button>
+									</p>
+									
+								</td>
+						
+
+							</tr>
+						</span>
+
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		
+		document.addEventListener('DOMContentLoaded', function(){
+		
+		function actoresUrl(url, i){
+			fetch(url)
+			.then(response => response.json())
+			.then(data => {var p = document.getElementById(i);
+			console.log(p);
+			});
+			
+		}	
+		});
+
+	</script>
+
+</body>
+
+</html>
